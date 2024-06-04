@@ -4,12 +4,23 @@ const app= express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 const message="Invalid number"
-const token={
+const data={
+    "companyName": "Sona College Of Technology",
+    "clientID": "60046d63-5c41-4280-8fd4-56b8d73240ec",
+    "clientSecret": "uPACHFsccIsOnAAp",
+    "ownerName": "Keerthi kumar S",
+    "ownerEmail": "keerthikumar.21it@sonatech.ac.in",
+    "rollNo": "61781921106056"
+}
+var token={
     "token_type": "Bearer",
     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzE3NTAyNzMwLCJpYXQiOjE3MTc1MDI0MzAsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6IjYwMDQ2ZDYzLTVjNDEtNDI4MC04ZmQ0LTU2YjhkNzMyNDBlYyIsInN1YiI6ImtlZXJ0aGlrdW1hci4yMWl0QHNvbmF0ZWNoLmFjLmluIn0sImNvbXBhbnlOYW1lIjoiU29uYSBDb2xsZWdlIE9mIFRlY2hub2xvZ3kiLCJjbGllbnRJRCI6IjYwMDQ2ZDYzLTVjNDEtNDI4MC04ZmQ0LTU2YjhkNzMyNDBlYyIsImNsaWVudFNlY3JldCI6InVQQUNIRnNjY0lzT25BQXAiLCJvd25lck5hbWUiOiJLZWVydGhpIGt1bWFyIFMiLCJvd25lckVtYWlsIjoia2VlcnRoaWt1bWFyLjIxaXRAc29uYXRlY2guYWMuaW4iLCJyb2xsTm8iOiI2MTc4MTkyMTEwNjA1NiJ9.THpujY8nDbwT2VacuEt1pT_k3uJ96eQy2TrZ7fYQ1Nc",
     "expires_in": 1717502730
 }
 app.get("/numbers/:num_id",async (req,res)=>{
+    const response=await axios.post("http://20.244.56.144/test/auth",data);
+    token=response.data;
+    console.log(token);
     const num_id=req.params.num_id;
     if(num_id=="p"){
         const response=await axios.get("http://20.244.56.144/test/primes",{
